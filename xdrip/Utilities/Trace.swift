@@ -639,6 +639,10 @@ class Trace {
 
                         }
 
+                    case .HematonixType:
+
+                        traceInfo.appendStringAndNewLine("        Type: " + bluetoothPeripheralType.rawValue)
+
                     case .WatlaaType:
                         if let watlaa = blePeripheral.watlaa {
                             
