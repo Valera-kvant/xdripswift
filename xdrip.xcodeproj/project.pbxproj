@@ -2354,7 +2354,6 @@
                                F816E10124367389009EE65B /* GNSENtry */,
                                F80D916624F70840006840B5 /* Libre2 */,
                                F8C9784E242A9FD500A09483 /* MiaoMiao */,
-                               FB7717682A7B20E49F879212 /* Hematonix */,
                        );
 			path = Libre;
 			sourceTree = "<group>";
@@ -3268,6 +3267,7 @@
 			isa = PBXGroup;
 			children = (
 				F8DF766A23ED9AF100063910 /* Dexcom */,
+                                FB7717682A7B20E49F879212 /* Hematonix */,
 				F808D2C3240323750084B5DB /* Libre */,
 			);
 			path = CGM;
