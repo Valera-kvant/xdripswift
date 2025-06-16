@@ -49,8 +49,6 @@ enum BluetoothPeripheralType: String, CaseIterable {
     /// Atom
     case AtomType = "Atom"
 
-    /// Hematonix
-    case HematonixType = "Hematonix"
     
     /// to use a Libre (such as L2 US/CA/AUS or Libre 3/Libre 3 Plus) or just any generic heartbeat device as heartbeat
     case Libre3HeartBeatType = "Libre/Generic HeartBeat"
@@ -104,9 +102,6 @@ enum BluetoothPeripheralType: String, CaseIterable {
             
         case .AtomType:
             return AtomBluetoothPeripheralViewModel()
-
-        case .HematonixType:
-            return nil
             
         case .Libre3HeartBeatType:
             return Libre3HeartBeatBluetoothPeripheralViewModel()
@@ -170,9 +165,6 @@ enum BluetoothPeripheralType: String, CaseIterable {
             
         case .AtomType:
             return Atom(address: address, name: name, alias: nil, nsManagedObjectContext: nsManagedObjectContext)
-
-        case .HematonixType:
-            return Hematonix(address: address, name: name, alias: nil, nsManagedObjectContext: nsManagedObjectContext)
             
         case .Libre3HeartBeatType:
             return Libre2HeartBeat(address: address, name: name, alias: nil, nsManagedObjectContext: nsManagedObjectContext)
@@ -198,7 +190,7 @@ enum BluetoothPeripheralType: String, CaseIterable {
         case .M5StackType, .M5StickCType:
             return .M5Stack
             
-        case .DexcomType, .BubbleType, .MiaoMiaoType, .BluconType, .GNSentryType, .BlueReaderType, .DropletType, .DexcomG4Type, .WatlaaType, .Libre2Type, .AtomType, .HematonixType, .DexcomG7Type:
+        case .DexcomType, .BubbleType, .MiaoMiaoType, .BluconType, .GNSentryType, .BlueReaderType, .DropletType, .DexcomG4Type, .WatlaaType, .Libre2Type, .AtomType, .DexcomG7Type:
             return .CGM
             
         case .Libre3HeartBeatType, .DexcomG7HeartBeatType, .OmniPodHeartBeatType:
@@ -275,7 +267,7 @@ enum BluetoothPeripheralType: String, CaseIterable {
         
         switch self {
             
-        case .BubbleType, .MiaoMiaoType, .AtomType, .HematonixType: //, .DexcomType:
+        case .BubbleType, .MiaoMiaoType, .AtomType: //, .DexcomType:
             return true
             
         case .Libre2Type:
@@ -294,7 +286,7 @@ enum BluetoothPeripheralType: String, CaseIterable {
         
         switch self {
             
-        case .Libre2Type, .BubbleType, .MiaoMiaoType, .WatlaaType, .BluconType, .BlueReaderType, .DropletType , .GNSentryType, .AtomType, .HematonixType:
+        case .Libre2Type, .BubbleType, .MiaoMiaoType, .WatlaaType, .BluconType, .BlueReaderType, .DropletType , .GNSentryType, .AtomType:
             return true
             
         default:

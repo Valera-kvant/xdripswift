@@ -639,14 +639,6 @@ class Trace {
 
                         }
 
-                    case .HematonixType:
-                        if let hematonix = blePeripheral.hematonix {
-
-                            traceInfo.appendStringAndNewLine("        Type: " + bluetoothPeripheralType.rawValue)
-                            traceInfo.appendStringAndNewLine("        Battery level: " + hematonix.batteryLevel.description)
-
-                        }
-                        
                     case .WatlaaType:
                         if let watlaa = blePeripheral.watlaa {
                             
