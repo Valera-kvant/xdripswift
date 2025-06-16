@@ -111,6 +111,9 @@ enum CGMTransmitterType:String, CaseIterable {
     
     /// Atom
     case Atom = "Atom"
+
+    /// Hematonix
+    case Hematonix = "Hematonix"
     
     /// watlaa
     case watlaa = "Watlaa"
@@ -126,7 +129,7 @@ enum CGMTransmitterType:String, CaseIterable {
         case .dexcomG4, .dexcom, .dexcomG7:
             return .Dexcom
             
-        case .miaomiao, .Bubble, .GNSentry, .Droplet1, .blueReader, .watlaa, .Blucon, .Libre2, .Atom:
+        case .miaomiao, .Bubble, .GNSentry, .Droplet1, .blueReader, .watlaa, .Blucon, .Libre2, .Atom, .Hematonix:
             return .Libre
             
         }
@@ -168,9 +171,9 @@ enum CGMTransmitterType:String, CaseIterable {
         case .watlaa:
             return false
             
-        case .Libre2:
+        case .Libre2, .Hematonix:
             return true
-            
+
         case .Atom:
             return true
             
@@ -190,7 +193,7 @@ enum CGMTransmitterType:String, CaseIterable {
         case .dexcomG4, .dexcom, .GNSentry, .Droplet1, .blueReader, .watlaa:
             return true
             
-        case .miaomiao, .Bubble, .Blucon, .Libre2, .Atom:
+        case .miaomiao, .Bubble, .Blucon, .Libre2, .Atom, .Hematonix:
             return true
             
         case .dexcomG7:
@@ -232,9 +235,12 @@ enum CGMTransmitterType:String, CaseIterable {
             
         case .Libre2:
             return ConstantsDefaultAlertLevels.defaultBatteryAlertLevelLibre2
-            
+
         case .Atom:
             return ConstantsDefaultAlertLevels.defaultBatteryAlertLevelAtom
+
+        case .Hematonix:
+            return ConstantsDefaultAlertLevels.defaultBatteryAlertLevelHematonix
             
         case .dexcomG7:
             // we don't use this
@@ -271,9 +277,9 @@ enum CGMTransmitterType:String, CaseIterable {
         case .watlaa:
             return "%"
             
-        case .Libre2:
+        case .Libre2, .Hematonix:
             return "%"
-            
+
         case .Atom:
             return "%"
             

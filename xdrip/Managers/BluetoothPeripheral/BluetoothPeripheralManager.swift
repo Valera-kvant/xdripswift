@@ -495,6 +495,11 @@ class BluetoothPeripheralManager: NSObject {
                 if bluetoothTransmitter is CGMAtomTransmitter {
                     return .AtomType
                 }
+
+            case .HematonixType:
+                if bluetoothTransmitter is CGMHematonixTransmitter {
+                    return .HematonixType
+                }
                 
             case .BluconType:
                 if bluetoothTransmitter is CGMBluconTransmitter {
@@ -601,7 +606,10 @@ class BluetoothPeripheralManager: NSObject {
             }
             
             return CGMAtomTransmitter(address: nil, name: nil, bluetoothTransmitterDelegate: bluetoothTransmitterDelegate ?? self, cGMAtomTransmitterDelegate: self, cGMTransmitterDelegate: cgmTransmitterDelegate, sensorSerialNumber: nil, webOOPEnabled: nil, nonFixedSlopeEnabled: nil, firmWare: nil)
-            
+
+        case .HematonixType:
+            return CGMHematonixTransmitter(bluetoothTransmitterDelegate: bluetoothTransmitterDelegate ?? self)
+
         case .DropletType:
             
             guard let cgmTransmitterDelegate = cgmTransmitterDelegate else {

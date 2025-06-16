@@ -12,6 +12,7 @@ enum ConstantsDefaultAlertLevels {
     static let defaultBatteryAlertLevelWatlaa = 20
     static let defaultBatteryAlertLevelLibre2 = 20
     static let defaultBatteryAlertLevelAtom = 20
+    static let defaultBatteryAlertLevelHematonix = 20
     static let defaultBatteryAlertLevelPhone = 10
     // blood glucose level alert values in mgdl
     static let veryHigh = 250
