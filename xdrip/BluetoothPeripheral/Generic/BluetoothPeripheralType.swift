@@ -49,6 +49,9 @@ enum BluetoothPeripheralType: String, CaseIterable {
     /// Atom
     case AtomType = "Atom"
 
+    /// Hematonix
+    case HematonixType = "Hematonix"
+
     
     /// to use a Libre (such as L2 US/CA/AUS or Libre 3/Libre 3 Plus) or just any generic heartbeat device as heartbeat
     case Libre3HeartBeatType = "Libre/Generic HeartBeat"
@@ -102,7 +105,10 @@ enum BluetoothPeripheralType: String, CaseIterable {
             
         case .AtomType:
             return AtomBluetoothPeripheralViewModel()
-            
+
+        case .HematonixType:
+            return HematonixBluetoothPeripheralViewModel()
+
         case .Libre3HeartBeatType:
             return Libre3HeartBeatBluetoothPeripheralViewModel()
             
@@ -165,7 +171,10 @@ enum BluetoothPeripheralType: String, CaseIterable {
             
         case .AtomType:
             return Atom(address: address, name: name, alias: nil, nsManagedObjectContext: nsManagedObjectContext)
-            
+
+        case .HematonixType:
+            return Hematonix(address: address, name: name, alias: nil, nsManagedObjectContext: nsManagedObjectContext)
+
         case .Libre3HeartBeatType:
             return Libre2HeartBeat(address: address, name: name, alias: nil, nsManagedObjectContext: nsManagedObjectContext)
             
@@ -190,7 +199,7 @@ enum BluetoothPeripheralType: String, CaseIterable {
         case .M5StackType, .M5StickCType:
             return .M5Stack
             
-        case .DexcomType, .BubbleType, .MiaoMiaoType, .BluconType, .GNSentryType, .BlueReaderType, .DropletType, .DexcomG4Type, .WatlaaType, .Libre2Type, .AtomType, .DexcomG7Type:
+        case .DexcomType, .BubbleType, .MiaoMiaoType, .BluconType, .GNSentryType, .BlueReaderType, .DropletType, .DexcomG4Type, .WatlaaType, .Libre2Type, .AtomType, .HematonixType, .DexcomG7Type:
             return .CGM
             
         case .Libre3HeartBeatType, .DexcomG7HeartBeatType, .OmniPodHeartBeatType:
@@ -204,10 +213,13 @@ enum BluetoothPeripheralType: String, CaseIterable {
     func needsTransmitterId() -> Bool {
         
         switch self {
-            
+
         case .DexcomType, .BluconType, .DexcomG4Type, .Libre3HeartBeatType, .DexcomG7HeartBeatType:
             return true
-            
+
+        case .HematonixType:
+            return false
+
         default:
             return false
         }
@@ -255,7 +267,10 @@ enum BluetoothPeripheralType: String, CaseIterable {
                 return Texts_ErrorMessages.TransmitterIdBluCon
             }
             return nil
-            
+
+        case .HematonixType:
+            return nil
+
         default:
             return nil
         }
@@ -266,14 +281,17 @@ enum BluetoothPeripheralType: String, CaseIterable {
     func canWebOOP() -> Bool {
         
         switch self {
-            
+
         case .BubbleType, .MiaoMiaoType, .AtomType: //, .DexcomType:
             return true
             
         case .Libre2Type:
             // oop web can still be used for Libre2 because in the end the data received is Libre 1 format, we can use oop web to get slope parameters
             return true
-            
+
+        case .HematonixType:
+            return false
+
         default:
             return false
             
@@ -288,7 +306,10 @@ enum BluetoothPeripheralType: String, CaseIterable {
             
         case .Libre2Type, .BubbleType, .MiaoMiaoType, .WatlaaType, .BluconType, .BlueReaderType, .DropletType , .GNSentryType, .AtomType:
             return true
-            
+
+        case .HematonixType:
+            return false
+
         default:
             return false
             
@@ -300,13 +321,16 @@ enum BluetoothPeripheralType: String, CaseIterable {
     func needsNFCScanToConnect() -> Bool {
         
         switch self {
-            
+
         case .Libre2Type:
             return true
-            
+
+        case .HematonixType:
+            return false
+
         default:
             return false
-            
+
         }
         
     }

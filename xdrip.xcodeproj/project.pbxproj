@@ -288,8 +288,9 @@
 		F816E118243921FB009EE65B /* CGMBDropletTransmitterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F816E117243921FB009EE65B /* CGMBDropletTransmitterDelegate.swift */; };
 		F816E11A243923B2009EE65B /* Droplet+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F816E119243923B2009EE65B /* Droplet+CoreDataClass.swift */; };
 		F816E11C2439243B009EE65B /* Droplet+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F816E11B2439243B009EE65B /* Droplet+CoreDataProperties.swift */; };
-		F816E12124392D40009EE65B /* DropletBluetoothPeripheralViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F816E12024392D40009EE65B /* DropletBluetoothPeripheralViewModel.swift */; };
-		F816E1242439DB63009EE65B /* DexcomG4+BluetoothPeripheral.swift in Sources */ = {isa = PBXBuildFile; fileRef = F816E1232439DB63009EE65B /* DexcomG4+BluetoothPeripheral.swift */; };
+                F816E12124392D40009EE65B /* DropletBluetoothPeripheralViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F816E12024392D40009EE65B /* DropletBluetoothPeripheralViewModel.swift */; };
+                FB7717672A7B20E49F879212 /* HematonixBluetoothPeripheralViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F503D797A416EE7E438CD0E0 /* HematonixBluetoothPeripheralViewModel.swift */; };
+                F816E1242439DB63009EE65B /* DexcomG4+BluetoothPeripheral.swift in Sources */ = {isa = PBXBuildFile; fileRef = F816E1232439DB63009EE65B /* DexcomG4+BluetoothPeripheral.swift */; };
 		F816E1282439DE55009EE65B /* CGMDexomG4TransmitterDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F816E1272439DE55009EE65B /* CGMDexomG4TransmitterDelegate.swift */; };
 		F816E12A2439DF3A009EE65B /* DexcomG4+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F816E1292439DF3A009EE65B /* DexcomG4+CoreDataClass.swift */; };
 		F816E12C2439DFBA009EE65B /* DexcomG4+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F816E12B2439DFBA009EE65B /* DexcomG4+CoreDataProperties.swift */; };
@@ -1154,7 +1155,8 @@
 		F816E117243921FB009EE65B /* CGMBDropletTransmitterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGMBDropletTransmitterDelegate.swift; sourceTree = "<group>"; };
 		F816E119243923B2009EE65B /* Droplet+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Droplet+CoreDataClass.swift"; sourceTree = "<group>"; };
 		F816E11B2439243B009EE65B /* Droplet+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Droplet+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		F816E12024392D40009EE65B /* DropletBluetoothPeripheralViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropletBluetoothPeripheralViewModel.swift; sourceTree = "<group>"; };
+                F816E12024392D40009EE65B /* DropletBluetoothPeripheralViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropletBluetoothPeripheralViewModel.swift; sourceTree = "<group>"; };
+                F503D797A416EE7E438CD0E0 /* HematonixBluetoothPeripheralViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HematonixBluetoothPeripheralViewModel.swift; sourceTree = "<group>"; };
 		F816E1232439DB63009EE65B /* DexcomG4+BluetoothPeripheral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DexcomG4+BluetoothPeripheral.swift"; sourceTree = "<group>"; };
 		F816E1272439DE55009EE65B /* CGMDexomG4TransmitterDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGMDexomG4TransmitterDelegate.swift; sourceTree = "<group>"; };
 		F816E1292439DF3A009EE65B /* DexcomG4+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DexcomG4+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -2347,12 +2349,13 @@
 			children = (
 				F8A2BBFB25D9D36C001D1E78 /* Atom */,
 				F816E0EB2432A55F009EE65B /* Blucon */,
-				F808D2C6240323AE0084B5DB /* Bubble */,
-				F816E11F24392D27009EE65B /* Droplet */,
-				F816E10124367389009EE65B /* GNSENtry */,
-				F80D916624F70840006840B5 /* Libre2 */,
-				F8C9784E242A9FD500A09483 /* MiaoMiao */,
-			);
+                               F808D2C6240323AE0084B5DB /* Bubble */,
+                               F816E11F24392D27009EE65B /* Droplet */,
+                               F816E10124367389009EE65B /* GNSENtry */,
+                               F80D916624F70840006840B5 /* Libre2 */,
+                               F8C9784E242A9FD500A09483 /* MiaoMiao */,
+                               FB7717682A7B20E49F879212 /* Hematonix */,
+                       );
 			path = Libre;
 			sourceTree = "<group>";
 		};
@@ -2471,15 +2474,23 @@
 			path = Droplet;
 			sourceTree = "<group>";
 		};
-		F816E11F24392D27009EE65B /* Droplet */ = {
-			isa = PBXGroup;
-			children = (
-				F816E12024392D40009EE65B /* DropletBluetoothPeripheralViewModel.swift */,
-			);
-			path = Droplet;
-			sourceTree = "<group>";
-		};
-		F816E1222439DB42009EE65B /* G4 */ = {
+                F816E11F24392D27009EE65B /* Droplet */ = {
+                        isa = PBXGroup;
+                        children = (
+                                F816E12024392D40009EE65B /* DropletBluetoothPeripheralViewModel.swift */,
+                        );
+                        path = Droplet;
+                        sourceTree = "<group>";
+                };
+                FB7717682A7B20E49F879212 /* Hematonix */ = {
+                        isa = PBXGroup;
+                        children = (
+                                F503D797A416EE7E438CD0E0 /* HematonixBluetoothPeripheralViewModel.swift */,
+                        );
+                        path = Hematonix;
+                        sourceTree = "<group>";
+                };
+                F816E1222439DB42009EE65B /* G4 */ = {
 			isa = PBXGroup;
 			children = (
 				F816E1232439DB63009EE65B /* DexcomG4+BluetoothPeripheral.swift */,
@@ -4689,8 +4700,9 @@
 				F898EDF2234A8A0500BFB79B /* UInt8.swift in Sources */,
 				F8DF766423E781C100063910 /* BLEPeripheralAccessor.swift in Sources */,
 				F8F1671727288B24001AA3D8 /* DexcomSessionStopRxMessage.swift in Sources */,
-				F816E12124392D40009EE65B /* DropletBluetoothPeripheralViewModel.swift in Sources */,
-				F8A5EEB8257CF2940085E660 /* TextsLibreNFC.swift in Sources */,
+                                F816E12124392D40009EE65B /* DropletBluetoothPeripheralViewModel.swift in Sources */,
+                                FB7717672A7B20E49F879212 /* HematonixBluetoothPeripheralViewModel.swift in Sources */,
+                                F8A5EEB8257CF2940085E660 /* TextsLibreNFC.swift in Sources */,
 				F816E1082437E5B9009EE65B /* BlueReader+BluetoothPeripheral.swift in Sources */,
 				F8E51D67244BAE0E001C9E5A /* WatlaaBluetoothTransmitterMaster+CGMTransmitter.swift in Sources */,
 				F81FA0002289E4990028C70F /* AlertSettingsViewControllerData.swift in Sources */,
