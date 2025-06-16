@@ -167,7 +167,7 @@ class BluetoothPeripheralManager: NSObject {
                     // no need to send reading to watlaa in master mode
                     break
                     
-                case .DexcomType, .BubbleType, .MiaoMiaoType, .BluconType, .GNSentryType, .BlueReaderType, .DropletType, .DexcomG4Type, .Libre2Type, .AtomType, .DexcomG7Type:
+                case .DexcomType, .BubbleType, .MiaoMiaoType, .BluconType, .GNSentryType, .BlueReaderType, .DropletType, .DexcomG4Type, .Libre2Type, .AtomType, .HematonixType, .DexcomG7Type:
                     // cgm's don't receive reading, they send it
                     break
                     
@@ -495,6 +495,11 @@ class BluetoothPeripheralManager: NSObject {
                 if bluetoothTransmitter is CGMAtomTransmitter {
                     return .AtomType
                 }
+
+            case .HematonixType:
+                if bluetoothTransmitter is CGMHematonixTransmitter {
+                    return .HematonixType
+                }
                 
             case .BluconType:
                 if bluetoothTransmitter is CGMBluconTransmitter {
@@ -601,6 +606,14 @@ class BluetoothPeripheralManager: NSObject {
             }
             
             return CGMAtomTransmitter(address: nil, name: nil, bluetoothTransmitterDelegate: bluetoothTransmitterDelegate ?? self, cGMAtomTransmitterDelegate: self, cGMTransmitterDelegate: cgmTransmitterDelegate, sensorSerialNumber: nil, webOOPEnabled: nil, nonFixedSlopeEnabled: nil, firmWare: nil)
+
+        case .HematonixType:
+
+            guard let cgmTransmitterDelegate = cgmTransmitterDelegate else {
+                fatalError("in createNewTransmitter, HematonixType, cgmTransmitterDelegate is nil")
+            }
+
+            return CGMHematonixTransmitter(address: nil, name: nil, bluetoothTransmitterDelegate: bluetoothTransmitterDelegate ?? self, cGMTransmitterDelegate: cgmTransmitterDelegate, sensorUID: nil)
             
         case .DropletType:
             
@@ -856,9 +869,28 @@ class BluetoothPeripheralManager: NSObject {
                         } else {
                             
                             // bluetoothTransmitters array (which shoul dhave the same number of elements as bluetoothPeripherals) needs to have an empty row for the transmitter
+                        bluetoothTransmitters.insert(nil, at: index)
+
+                    }
+
+                case .HematonixType:
+
+                    if let hematonix = blePeripheral.hematonix {
+
+                        blePeripheralFound = true
+
+                        let index = insertInBluetoothPeripherals(bluetoothPeripheral: hematonix)
+
+                        if hematonix.blePeripheral.shouldconnect {
+                            bluetoothTransmitters.insert(CGMHematonixTransmitter(address: hematonix.blePeripheral.address, name: hematonix.blePeripheral.name, bluetoothTransmitterDelegate: self, cGMTransmitterDelegate: cgmTransmitterDelegate, sensorUID: nil), at: index)
+                            if bluetoothPeripheralType.category() == .CGM {
+                                currentCgmTransmitterAddress = blePeripheral.address
+                            }
+                        } else {
                             bluetoothTransmitters.insert(nil, at: index)
-                            
                         }
+
+                    }
                         
                     }
                     
@@ -1449,7 +1481,7 @@ class BluetoothPeripheralManager: NSObject {
                     bluetoothPeripheral.blePeripheral.parameterUpdateNeededAtNextConnect = true
                 }
              
-            case .WatlaaType, .DexcomType, .BubbleType, .MiaoMiaoType, .BluconType, .GNSentryType, .BlueReaderType, .DropletType, .DexcomG4Type, .Libre2Type, .AtomType, .Libre3HeartBeatType, .DexcomG7HeartBeatType, .OmniPodHeartBeatType, .DexcomG7Type:
+            case .WatlaaType, .DexcomType, .BubbleType, .MiaoMiaoType, .BluconType, .GNSentryType, .BlueReaderType, .DropletType, .DexcomG4Type, .Libre2Type, .AtomType, .HematonixType, .Libre3HeartBeatType, .DexcomG7HeartBeatType, .OmniPodHeartBeatType, .DexcomG7Type:
                 
                 // nothing to check
                 break

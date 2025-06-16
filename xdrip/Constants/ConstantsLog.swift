@@ -120,6 +120,9 @@ enum ConstantsLog {
     
     /// atom
     static let categoryCGMAtom =                        "categoryCGMAtom               "
+
+    /// Hematonix
+    static let categoryCGMHematonix =                   "CGMHematonix                "
     
     /// LibreOOPClient
     static let categoryLibreOOPClient =                 "LibreOOPClient                "
