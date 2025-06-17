@@ -1,10 +1,8 @@
 enum HematonixDecoder {
-    /// ← поставьте СВОИ коэффициенты k и b!
-    private static let k = 0.00056
-    private static let b = 15.4 - 0.00056 * 265.0
-
+    /// Decode Manufacturer / Service‑Data payload using provided coefficients
+    
     /// Декодируем Manufacturer / Service‑Data payload
-    static func decode(_ payload: Data) -> Double? {
+    static func decode(_ payload: Data, k: Double, b: Double) -> Double? {
         guard payload.count >= 2 else { return nil }
         let raw = payload.toUInt16(0)
         let mmol = Double(raw) * k + b
@@ -13,7 +11,7 @@ enum HematonixDecoder {
     }
 
     /// Декодируем «длинный» блок 0xE4 (ADV_EXT_IND)
-    static func decodeExtended(_ blob: Data) -> Double? {
+    static func decodeExtended(_ blob: Data, k: Double, b: Double) -> Double? {
         guard blob.count >= 0x20 else { return nil }
         let raw = blob[0x11]
         let mmol = Double(raw) / 10.0

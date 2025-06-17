@@ -58,6 +58,12 @@ extension UserDefaults {
         case libreLinkUpReAcceptNeeded = "libreLinkUpReAcceptNeeded"
         ///LibreLinkUp is a 15 day "Plus" sensor being used?
         case libreLinkUpIs15DaySensor = "libreLinkUpIs15DaySensor"
+
+        /// Hematonix calibration coefficient k
+        case hematonixK = "hematonixK"
+
+        /// Hematonix calibration coefficient b
+        case hematonixB = "hematonixB"
         
         // General
         
@@ -692,6 +698,28 @@ extension UserDefaults {
         }
         set {
             set(newValue.rawValue, forKey: Key.liveActivityType.rawValue)
+        }
+    }
+
+    /// Hematonix calibration slope k
+    var hematonixK: Double {
+        get {
+            let value = double(forKey: Key.hematonixK.rawValue)
+            return value == 0 ? 0.00056 : value
+        }
+        set {
+            set(newValue, forKey: Key.hematonixK.rawValue)
+        }
+    }
+
+    /// Hematonix calibration intercept b
+    var hematonixB: Double {
+        get {
+            let value = double(forKey: Key.hematonixB.rawValue)
+            return value == 0 ? 15.4 - 0.00056 * 265.0 : value
+        }
+        set {
+            set(newValue, forKey: Key.hematonixB.rawValue)
         }
     }
     
