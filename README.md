@@ -31,3 +31,8 @@ Current Status :
 - create events in Calendar when new glucose reading is received. This to support AppleWatch. More info : https://github.com/JohanDegraeve/xdripswift/wiki/Calendar-Events---Apple-Watch
 
 For developers : please go to the Wiki : https://github.com/JohanDegraeve/xdripswift/wiki
+
+## Hematonix Calibration
+
+Hematonix transmitter decoding uses two coefficients `k` and `b`.  Default values are loaded from `UserDefaults` or the bundled `HematonixConfig.json` file.  To adjust without recompiling, update these keys using the Settings app or edit `HematonixConfig.json` in the app bundle and restart the application.
+

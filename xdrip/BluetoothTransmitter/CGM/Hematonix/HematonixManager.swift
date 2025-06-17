@@ -30,6 +30,9 @@ final class HematonixManager: NSObject, CBCentralManagerDelegate {
     // UID сенсора (9 символов из QR).  Если nil — принимаем все пакеты.
     private let sensorUID: String?
 
+    // Коэффициенты декодирования
+    private let calibration: HematonixConfiguration
+
     // BLE
     private lazy var central = CBCentralManager(delegate: self, queue: .main)
 
@@ -39,6 +42,7 @@ final class HematonixManager: NSObject, CBCentralManagerDelegate {
 
     init(uid: String? = nil) {
         self.sensorUID = uid?.uppercased()
+        self.calibration = HematonixConfiguration.load()
         super.init()
     }
 
@@ -59,7 +63,7 @@ final class HematonixManager: NSObject, CBCentralManagerDelegate {
         if let msd = advertisementData[CBAdvertisementDataManufacturerDataKey] as? Data,
            msd.count >= 4,                     // 2 B company + ≥2 B payload
            msd.toUInt16(0) == companyID,
-           let mmol = HematonixDecoder.decode(msd.dropFirst(2)) {
+           let mmol = HematonixDecoder.decode(msd.dropFirst(2), k: calibration.k, b: calibration.b) {
             push(mmol, from: peripheral)
             return
         }
@@ -67,14 +71,14 @@ final class HematonixManager: NSObject, CBCentralManagerDelegate {
         // —–––– 2) Service Data FD5A
         if let svc = advertisementData[CBAdvertisementDataServiceDataKey] as? [CBUUID: Data],
            let blob = svc[svcUUID],
-           let mmol = HematonixDecoder.decode(blob) {
+           let mmol = HematonixDecoder.decode(blob, k: calibration.k, b: calibration.b) {
             push(mmol, from: peripheral)
             return
         }
 
         // —–––– 3) RAW "unknown" AD type (0xE4, 0x74 bytes)
         if let ext = advertisementData["kCBAdvDataExtendedData"] as? Data, // non‑public key; works iOS 13+
-           let mmol = HematonixDecoder.decodeExtended(ext) {
+           let mmol = HematonixDecoder.decodeExtended(ext, k: calibration.k, b: calibration.b) {
             push(mmol, from: peripheral)
         }
     }
