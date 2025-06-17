@@ -2106,7 +2106,7 @@ final class RootViewController: UIViewController, ObservableObject {
             calibrator = NoCalibrator()
             
             
-        case .miaomiao, .GNSentry, .Blucon, .Bubble, .Droplet1, .blueReader, .watlaa, .Libre2, .Atom:
+        case .miaomiao, .GNSentry, .Blucon, .Bubble, .Droplet1, .blueReader, .watlaa, .Libre2, .Atom, .Hematonix:
             
             if cgmTransmitter.isWebOOPEnabled() {
                 
