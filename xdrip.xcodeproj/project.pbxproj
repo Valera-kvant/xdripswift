@@ -752,7 +752,9 @@
 		F8F9724723A69A8000C3F17D /* BluetoothPeripheralCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F9724623A69A8000C3F17D /* BluetoothPeripheralCategory.swift */; };
 		F8F9724923A69DAE00C3F17D /* M5StickC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F9724823A69DAE00C3F17D /* M5StickC.swift */; };
 		F8FDD6CB2553385000625B49 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FDD6CA2553385000625B49 /* Array.swift */; };
-		F8FDFEA9260DE1A70047597D /* DTCustomColoredAccessory.m in Sources */ = {isa = PBXBuildFile; fileRef = F8FDFEA8260DE1A70047597D /* DTCustomColoredAccessory.m */; };
+                F8FDFEA9260DE1A70047597D /* DTCustomColoredAccessory.m in Sources */ = {isa = PBXBuildFile; fileRef = F8FDFEA8260DE1A70047597D /* DTCustomColoredAccessory.m */; };
+                F35138EB5AA2824569FCB362 /* HematonixManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 548AFB8DE6F8680576432E3A /* HematonixManager.swift */; };
+                E6E9A61280EDC94F42569A63 /* HematonixDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12AE30ED3E11B8003AF07C72 /* HematonixDecoder.swift */; };
 		F8FDFEAD260DE1B90047597D /* ConstantsUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FDFEAC260DE1B90047597D /* ConstantsUI.swift */; };
 /* End PBXBuildFile section */
 
@@ -1888,7 +1890,9 @@
 		F8F9724823A69DAE00C3F17D /* M5StickC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = M5StickC.swift; sourceTree = "<group>"; };
 		F8FDD6CA2553385000625B49 /* Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		F8FDFEA7260DE1A70047597D /* DTCustomColoredAccessory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTCustomColoredAccessory.h; sourceTree = "<group>"; };
-		F8FDFEA8260DE1A70047597D /* DTCustomColoredAccessory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTCustomColoredAccessory.m; sourceTree = "<group>"; };
+                F8FDFEA8260DE1A70047597D /* DTCustomColoredAccessory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTCustomColoredAccessory.m; sourceTree = "<group>"; };
+                548AFB8DE6F8680576432E3A /* HematonixManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HematonixManager.swift; sourceTree = "<group>"; };
+                12AE30ED3E11B8003AF07C72 /* HematonixDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HematonixDecoder.swift; sourceTree = "<group>"; };
 		F8FDFEAC260DE1B90047597D /* ConstantsUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstantsUI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -3615,9 +3619,10 @@
 		F8F971BA23A5915900C3F17D /* CGM */ = {
 			isa = PBXGroup;
 			children = (
-				F8F971BB23A5915900C3F17D /* Dexcom */,
-				F8F971F023A5915900C3F17D /* Generic */,
-				F8F971D623A5915900C3F17D /* Libre */,
+                                F8F971BB23A5915900C3F17D /* Dexcom */,
+                                F8F971F023A5915900C3F17D /* Generic */,
+                                F8F971D623A5915900C3F17D /* Libre */,
+                                3E367694BFA2A49BEF55BDAD /* Hematonix */,
 			);
 			path = CGM;
 			sourceTree = "<group>";
@@ -3820,19 +3825,28 @@
 			path = M5Stack;
 			sourceTree = "<group>";
 		};
-		F8F9723A23A5934300C3F17D /* M5StickC */ = {
-			isa = PBXGroup;
-			children = (
-				F8F9723D23A593C000C3F17D /* M5StickCBluetoothPeripheralViewModel.swift */,
-			);
-			path = M5StickC;
-			sourceTree = "<group>";
-		};
-		F8FDFEA6260DE1A70047597D /* CustomColoredDisclosureIndicator */ = {
-			isa = PBXGroup;
-			children = (
-				F8FDFEA7260DE1A70047597D /* DTCustomColoredAccessory.h */,
-				F8FDFEA8260DE1A70047597D /* DTCustomColoredAccessory.m */,
+                F8F9723A23A5934300C3F17D /* M5StickC */ = {
+                        isa = PBXGroup;
+                        children = (
+                                F8F9723D23A593C000C3F17D /* M5StickCBluetoothPeripheralViewModel.swift */,
+                        );
+                        path = M5StickC;
+                        sourceTree = "<group>";
+                };
+                3E367694BFA2A49BEF55BDAD /* Hematonix */ = {
+                        isa = PBXGroup;
+                        children = (
+                                548AFB8DE6F8680576432E3A /* HematonixManager.swift */,
+                                12AE30ED3E11B8003AF07C72 /* HematonixDecoder.swift */,
+                        );
+                        path = Hematonix;
+                        sourceTree = "<group>";
+                };
+                F8FDFEA6260DE1A70047597D /* CustomColoredDisclosureIndicator */ = {
+                        isa = PBXGroup;
+                        children = (
+                                F8FDFEA7260DE1A70047597D /* DTCustomColoredAccessory.h */,
+                                F8FDFEA8260DE1A70047597D /* DTCustomColoredAccessory.m */,
 			);
 			path = CustomColoredDisclosureIndicator;
 			sourceTree = "<group>";
@@ -4780,8 +4794,10 @@
 				F8E5404C2522624800052CE5 /* ConstantsHousekeeping.swift in Sources */,
 				F8AF120124B9082000AE5BA2 /* Calibration+Nightscout.swift in Sources */,
 				47DB06E32A7137B000267BE3 /* LibreLinkUpFollowManager.swift in Sources */,
-				F808D2D2240329E80084B5DB /* Bubble+BluetoothPeripheral.swift in Sources */,
-				F8025C1321DA683400ECF0C0 /* Data.swift in Sources */,
+                                F808D2D2240329E80084B5DB /* Bubble+BluetoothPeripheral.swift in Sources */,
+                                F35138EB5AA2824569FCB362 /* HematonixManager.swift in Sources */,
+                                E6E9A61280EDC94F42569A63 /* HematonixDecoder.swift in Sources */,
+                                F8025C1321DA683400ECF0C0 /* Data.swift in Sources */,
 				F80859272364355F00F3829D /* ConstantsGlucoseChart.swift in Sources */,
 				F816E10324367389009EE65B /* GNSEntryBluetoothPeripheralViewModel.swift in Sources */,
 				D4E499AD277B4CE7000F8CBA /* DateOnly.swift in Sources */,

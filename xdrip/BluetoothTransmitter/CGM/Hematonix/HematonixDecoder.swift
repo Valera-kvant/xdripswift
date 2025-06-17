@@ -5,7 +5,7 @@ enum HematonixDecoder {
 
     static func decode(_ payload: Data) -> Double? {
         guard payload.count >= 2 else { return nil }
-        let raw = payload.toU16(0)
+        let raw = payload.uint16(position: 0)
         let mmol = Double(raw) * k + b
         // sanity-check
         return (2...25).contains(mmol) ? round(mmol * 10)/10 : nil
