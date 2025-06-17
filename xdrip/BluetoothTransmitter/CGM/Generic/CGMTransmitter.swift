@@ -114,9 +114,12 @@ enum CGMTransmitterType:String, CaseIterable {
     
     /// watlaa
     case watlaa = "Watlaa"
-    
+
     /// Libre2
     case Libre2 = "Libre2"
+
+    /// Hematonix CGM transmitter
+    case Hematonix = "Hematonix"
     
     /// what sensorType does this CGMTransmitter type support
     func sensorType() -> CGMSensorType {
@@ -126,7 +129,7 @@ enum CGMTransmitterType:String, CaseIterable {
         case .dexcomG4, .dexcom, .dexcomG7:
             return .Dexcom
             
-        case .miaomiao, .Bubble, .GNSentry, .Droplet1, .blueReader, .watlaa, .Blucon, .Libre2, .Atom:
+        case .miaomiao, .Bubble, .GNSentry, .Droplet1, .blueReader, .watlaa, .Blucon, .Libre2, .Atom, .Hematonix:
             return .Libre
             
         }
@@ -176,7 +179,10 @@ enum CGMTransmitterType:String, CaseIterable {
             
         case .dexcomG7:
             return true
-            
+
+        case .Hematonix:
+            return false
+
         }
     }
     
@@ -187,7 +193,7 @@ enum CGMTransmitterType:String, CaseIterable {
         
         switch self {
             
-        case .dexcomG4, .dexcom, .GNSentry, .Droplet1, .blueReader, .watlaa:
+        case .dexcomG4, .dexcom, .GNSentry, .Droplet1, .blueReader, .watlaa, .Hematonix:
             return true
             
         case .miaomiao, .Bubble, .Blucon, .Libre2, .Atom:
@@ -235,7 +241,10 @@ enum CGMTransmitterType:String, CaseIterable {
             
         case .Atom:
             return ConstantsDefaultAlertLevels.defaultBatteryAlertLevelAtom
-            
+
+        case .Hematonix:
+            return ConstantsDefaultAlertLevels.defaultBatteryAlertLevelLibre2
+
         case .dexcomG7:
             // we don't use this
             return ConstantsDefaultAlertLevels.defaultBatteryAlertLevelDexcomG5
@@ -270,13 +279,16 @@ enum CGMTransmitterType:String, CaseIterable {
             
         case .watlaa:
             return "%"
-            
+
         case .Libre2:
             return "%"
-            
+
         case .Atom:
             return "%"
-            
+
+        case .Hematonix:
+            return ""
+
         case .dexcomG7:
             // we don't use this
             return ""
