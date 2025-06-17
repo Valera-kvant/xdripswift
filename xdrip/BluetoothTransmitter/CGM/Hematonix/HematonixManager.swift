@@ -95,31 +95,3 @@ final class HematonixManager: NSObject, CBCentralManagerDelegate {
     }
 }
 
-// MARK: – Decoder stub
-///  *Временный* декодер: берёт один байт → делит на 10.
-///  При смене прошивки Hematonix достаточно поправить offset или формулу.
-enum HematonixDecoder {
-
-    /// Декодируем Manufacturer / Service‑Data payload
-    static func decode(_ data: Data) -> Double? {
-        guard data.count >= 1 else { return nil }
-        let raw = data[0]                  // первый байт after company / UUID
-        let mmol = Double(raw) / 10.0
-        return (2...25).contains(mmol) ? mmol : nil
-    }
-
-    /// Декодируем «длинный» блок 0xE4 (ADV_EXT_IND)
-    static func decodeExtended(_ blob: Data) -> Double? {
-        // sanity: длина 0x74 & offset 0x11 держатся на прошивке v110
-        guard blob.count >= 0x20 else { return nil }
-        let raw = blob[0x11]
-        return Double(raw) / 10.0
-    }
-}
-
-// MARK: – Helper
-private extension Data {
-    func toUInt16(_ offset: Int) -> UInt16 {
-        UInt16(littleEndian: self[offset..<offset+2].withUnsafeBytes { $0.load(as: UInt16.self) })
-    }
-}
