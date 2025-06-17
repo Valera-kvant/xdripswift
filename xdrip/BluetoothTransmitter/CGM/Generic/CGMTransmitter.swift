@@ -108,9 +108,12 @@ enum CGMTransmitterType:String, CaseIterable {
     
     /// BlueReader
     case blueReader = "BlueReader"
-    
+
     /// Atom
     case Atom = "Atom"
+
+    /// Hematonix
+    case Hematonix = "Hematonix"
     
     /// watlaa
     case watlaa = "Watlaa"
@@ -126,7 +129,7 @@ enum CGMTransmitterType:String, CaseIterable {
         case .dexcomG4, .dexcom, .dexcomG7:
             return .Dexcom
             
-        case .miaomiao, .Bubble, .GNSentry, .Droplet1, .blueReader, .watlaa, .Blucon, .Libre2, .Atom:
+        case .miaomiao, .Bubble, .GNSentry, .Droplet1, .blueReader, .watlaa, .Blucon, .Libre2, .Atom, .Hematonix:
             return .Libre
             
         }
@@ -170,10 +173,13 @@ enum CGMTransmitterType:String, CaseIterable {
             
         case .Libre2:
             return true
-            
+
         case .Atom:
             return true
-            
+
+        case .Hematonix:
+            return false
+
         case .dexcomG7:
             return true
             
@@ -190,7 +196,7 @@ enum CGMTransmitterType:String, CaseIterable {
         case .dexcomG4, .dexcom, .GNSentry, .Droplet1, .blueReader, .watlaa:
             return true
             
-        case .miaomiao, .Bubble, .Blucon, .Libre2, .Atom:
+        case .miaomiao, .Bubble, .Blucon, .Libre2, .Atom, .Hematonix:
             return true
             
         case .dexcomG7:
@@ -235,7 +241,10 @@ enum CGMTransmitterType:String, CaseIterable {
             
         case .Atom:
             return ConstantsDefaultAlertLevels.defaultBatteryAlertLevelAtom
-            
+
+        case .Hematonix:
+            return ConstantsDefaultAlertLevels.defaultBatteryAlertLevelAtom
+
         case .dexcomG7:
             // we don't use this
             return ConstantsDefaultAlertLevels.defaultBatteryAlertLevelDexcomG5
@@ -276,7 +285,10 @@ enum CGMTransmitterType:String, CaseIterable {
             
         case .Atom:
             return "%"
-            
+
+        case .Hematonix:
+            return "%"
+
         case .dexcomG7:
             // we don't use this
             return ""
