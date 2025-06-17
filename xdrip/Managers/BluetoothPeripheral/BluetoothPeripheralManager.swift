@@ -167,7 +167,7 @@ class BluetoothPeripheralManager: NSObject {
                     // no need to send reading to watlaa in master mode
                     break
                     
-                case .DexcomType, .BubbleType, .MiaoMiaoType, .BluconType, .GNSentryType, .BlueReaderType, .DropletType, .DexcomG4Type, .Libre2Type, .AtomType, .DexcomG7Type:
+                case .DexcomType, .BubbleType, .MiaoMiaoType, .BluconType, .GNSentryType, .HematonixType, .BlueReaderType, .DropletType, .DexcomG4Type, .Libre2Type, .AtomType, .DexcomG7Type:
                     // cgm's don't receive reading, they send it
                     break
                     

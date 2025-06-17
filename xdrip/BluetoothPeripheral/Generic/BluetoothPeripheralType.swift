@@ -42,6 +42,9 @@ enum BluetoothPeripheralType: String, CaseIterable {
     
     /// GNSentry
     case GNSentryType = "GNSentry"
+
+    /// Hematonix CGM
+    case HematonixType = "Hematonix CGM"
     
     /// watlaa master
     case WatlaaType = "Watlaa"
@@ -86,7 +89,10 @@ enum BluetoothPeripheralType: String, CaseIterable {
             
         case .GNSentryType:
             return GNSEntryBluetoothPeripheralViewModel()
-            
+
+        case .HematonixType:
+            return nil
+
         case .BlueReaderType:
             return nil
             
@@ -149,7 +155,10 @@ enum BluetoothPeripheralType: String, CaseIterable {
             
         case .GNSentryType:
             return GNSEntry(address: address, name: name, alias: nil, nsManagedObjectContext: nsManagedObjectContext)
-            
+
+        case .HematonixType:
+            return Hematonix(address: address, name: name, alias: nil, nsManagedObjectContext: nsManagedObjectContext)
+
         case .BlueReaderType:
             return BlueReader(address: address, name: name, alias: nil, nsManagedObjectContext: nsManagedObjectContext)
             
@@ -189,7 +198,7 @@ enum BluetoothPeripheralType: String, CaseIterable {
         case .M5StackType, .M5StickCType:
             return .M5Stack
             
-        case .DexcomType, .BubbleType, .MiaoMiaoType, .BluconType, .GNSentryType, .BlueReaderType, .DropletType, .DexcomG4Type, .WatlaaType, .Libre2Type, .AtomType, .DexcomG7Type:
+        case .DexcomType, .BubbleType, .MiaoMiaoType, .BluconType, .GNSentryType, .HematonixType, .BlueReaderType, .DropletType, .DexcomG4Type, .WatlaaType, .Libre2Type, .AtomType, .DexcomG7Type:
             return .CGM
             
         case .Libre3HeartBeatType, .DexcomG7HeartBeatType, .OmniPodHeartBeatType:

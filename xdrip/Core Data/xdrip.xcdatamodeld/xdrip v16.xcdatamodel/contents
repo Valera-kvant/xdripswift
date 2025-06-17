@@ -55,6 +55,7 @@
         <relationship name="blucon" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Blucon" inverseName="blePeripheral" inverseEntity="Blucon"/>
         <relationship name="blueReader" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="BlueReader" inverseName="blePeripheral" inverseEntity="BlueReader"/>
         <relationship name="bubble" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Bubble" inverseName="blePeripheral" inverseEntity="Bubble"/>
+        <relationship name="hematonix" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Hematonix" inverseName="blePeripheral" inverseEntity="Hematonix"/>
         <relationship name="dexcomG4" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="DexcomG4" inverseName="blePeripheral" inverseEntity="DexcomG4"/>
         <relationship name="dexcomG5" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="DexcomG5" inverseName="blePeripheral" inverseEntity="DexcomG5"/>
         <relationship name="dexcomG7" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DexcomG7" inverseName="blePeripheral" inverseEntity="DexcomG7"/>
@@ -73,6 +74,9 @@
     </entity>
     <entity name="BlueReader" representedClassName=".BlueReader" syncable="YES">
         <relationship name="blePeripheral" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="BLEPeripheral" inverseName="blueReader" inverseEntity="BLEPeripheral"/>
+    </entity>
+    <entity name="Hematonix" representedClassName=".Hematonix" syncable="YES">
+        <relationship name="blePeripheral" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="BLEPeripheral" inverseName="hematonix" inverseEntity="BLEPeripheral"/>
     </entity>
     <entity name="Bubble" representedClassName=".Bubble" syncable="YES">
         <attribute name="firmware" optional="YES" attributeType="String"/>
