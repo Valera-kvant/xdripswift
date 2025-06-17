@@ -617,10 +617,17 @@ class Trace {
 
                     case .GNSentryType:
                         if let gNSEntry = blePeripheral.gNSEntry {
-                            
+
                             traceInfo.appendStringAndNewLine("        Type: " + bluetoothPeripheralType.rawValue)
                             traceInfo.appendStringAndNewLine("        Battery level: " + gNSEntry.batteryLevel.description)
-                            
+
+                        }
+
+                    case .HematonixType:
+                        if blePeripheral.hematonix != nil {
+
+                            traceInfo.appendStringAndNewLine("        Type: " + bluetoothPeripheralType.rawValue)
+
                         }
 
                     case .MiaoMiaoType:
