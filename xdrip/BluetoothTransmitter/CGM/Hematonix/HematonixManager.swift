@@ -58,9 +58,9 @@ final class HematonixManager: NSObject, CBCentralManagerDelegate {
         // —–––– 1) Manufacturer Specific
         if let msd = advertisementData[CBAdvertisementDataManufacturerDataKey] as? Data,
            msd.count >= 4,                     // 2 B company + ≥2 B payload
-           msd.toUInt16(0) == companyID,
+           msd.uint16(position: 0) == companyID,
            let mmol = HematonixDecoder.decode(msd.dropFirst(2)) {
-            push(mmol, from: peripheral)
+            push(mmol, from: peripheral, rssi: RSSI)
             return
         }
 
@@ -68,19 +68,19 @@ final class HematonixManager: NSObject, CBCentralManagerDelegate {
         if let svc = advertisementData[CBAdvertisementDataServiceDataKey] as? [CBUUID: Data],
            let blob = svc[svcUUID],
            let mmol = HematonixDecoder.decode(blob) {
-            push(mmol, from: peripheral)
+            push(mmol, from: peripheral, rssi: RSSI)
             return
         }
 
         // —–––– 3) RAW "unknown" AD type (0xE4, 0x74 bytes)
         if let ext = advertisementData["kCBAdvDataExtendedData"] as? Data, // non‑public key; works iOS 13+
            let mmol = HematonixDecoder.decodeExtended(ext) {
-            push(mmol, from: peripheral)
+            push(mmol, from: peripheral, rssi: RSSI)
         }
     }
 
     // MARK: – Private
-    private func push(_ mmol: Double, from peripheral: CBPeripheral) {
+    private func push(_ mmol: Double, from peripheral: CBPeripheral, rssi: NSNumber) {
         // фильтруем по UID, если задан
         if let uid = sensorUID, !peripheral.identifier.uuidString.hasSuffix(uid) {
             return
@@ -91,35 +91,17 @@ final class HematonixManager: NSObject, CBCentralManagerDelegate {
                         source: .BLE,
                         sensorID: peripheral.identifier.uuidString)
         glucosePublisher.send(g)
-        print("Hematonix ▶︎ \(mmol, specifier: "%.1f") mmol/L  RSSI=\(peripheral.rssi ?? .zero)")
+        print("Hematonix ▶︎ \(mmol, specifier: \"%.1f\") mmol/L  RSSI=\(rssi)")
     }
 }
 
-// MARK: – Decoder stub
-///  *Временный* декодер: берёт один байт → делит на 10.
-///  При смене прошивки Hematonix достаточно поправить offset или формулу.
-enum HematonixDecoder {
-
-    /// Декодируем Manufacturer / Service‑Data payload
-    static func decode(_ data: Data) -> Double? {
-        guard data.count >= 1 else { return nil }
-        let raw = data[0]                  // первый байт after company / UUID
-        let mmol = Double(raw) / 10.0
-        return (2...25).contains(mmol) ? mmol : nil
-    }
-
-    /// Декодируем «длинный» блок 0xE4 (ADV_EXT_IND)
+// MARK: – HematonixDecoder helpers
+extension HematonixDecoder {
+    /// Decode "extended" ADV_EXT_IND block
     static func decodeExtended(_ blob: Data) -> Double? {
-        // sanity: длина 0x74 & offset 0x11 держатся на прошивке v110
+        // sanity: длина 0x74 & offset 0x11 держатся на прошивке v110
         guard blob.count >= 0x20 else { return nil }
         let raw = blob[0x11]
         return Double(raw) / 10.0
-    }
-}
-
-// MARK: – Helper
-private extension Data {
-    func toUInt16(_ offset: Int) -> UInt16 {
-        UInt16(littleEndian: self[offset..<offset+2].withUnsafeBytes { $0.load(as: UInt16.self) })
     }
 }
